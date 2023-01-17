@@ -31,6 +31,13 @@ describe('ShoppingListForm', () => {
     expect(onSubmit).toHaveBeenCalledWith(defaultShoppingList);
   });
 
-  
-  })
+  it('renders a form', () => {
+    render( 
+      <ShoppingListForm id="test" />
+    );
+
+    const form = screen.getByTestId('shopping-list-form-test');
+
+    expect(form).toBeInTheDocument();
+  });
 });
