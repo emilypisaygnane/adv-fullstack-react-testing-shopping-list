@@ -32,7 +32,7 @@ export async function updateShoppingListItem(shoppingListItem) {
 
 export async function deleteShoppingListItem(shoppingListItemId) {
   const response = await client
-    .from('anon-shopping-list-items')
+    .from('anon-shopping-list-itemss')
     .delete()
     .eq('id', shoppingListItemId)
   ;
