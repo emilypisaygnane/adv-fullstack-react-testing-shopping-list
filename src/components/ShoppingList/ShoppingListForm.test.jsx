@@ -40,4 +40,15 @@ describe('ShoppingListForm', () => {
 
     expect(form).toBeInTheDocument();
   });
+
+  it('input works', () => {
+    render(
+      <ShoppingListForm id="test" />
+    );
+
+    const input = screen.getByTestId('shopping-list-form-name-test');
+    fireEvent.change(input, { target: { value: 'testing, testing, 1, 2, 3' } });
+
+    expect(input.value).toBe('testing, testing, 1, 2, 3');
+  });
 });
