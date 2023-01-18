@@ -1,3 +1,5 @@
 export default function ShoppingListItem() {
-  return <></>;
+  return <>
+    <div data-testid="shopping-list-item"></div>
+  </>;
 }
