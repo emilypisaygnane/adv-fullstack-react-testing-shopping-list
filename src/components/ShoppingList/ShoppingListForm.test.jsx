@@ -21,7 +21,7 @@ describe('ShoppingListForm', () => {
     );
 
     const input = screen.getByTestId('shopping-list-form-name-test');
-    fireEvent.change(input, { target: { value: 'shopping list'} });
+    fireEvent.change(input, { target: { value: 'shopping list' } });
 
     const submitButton = screen.getByTestId(
       'shopping-list-form-submit-button-test'
