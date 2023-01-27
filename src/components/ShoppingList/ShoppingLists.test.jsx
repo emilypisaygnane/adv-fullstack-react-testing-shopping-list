@@ -24,3 +24,4 @@ describe('Shopping Lists', () => {
     expect(shoppingListsList.children.length).toBe(1);
   });
 });
+

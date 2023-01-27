@@ -52,3 +52,4 @@ describe('ShoppingListForm', () => {
     expect(input.value).toBe('testing, testing, 1, 2, 3');
   });
 });
+
