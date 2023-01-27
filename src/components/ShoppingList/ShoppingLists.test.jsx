@@ -1,31 +1,26 @@
-import {
-  fireEvent,
-  render,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+
 import ShoppingLists from './ShoppingLists';
 
-describe('ShoppingLists', () => {
-  it.skip('renders shopping lists', () => {
-    const onCreateShoppingList = jest.fn();
-    const { getByTestId } = render(
-      <ShoppingLists 
-        onCreateShoppingList={onCreateShoppingList}
-        shoppingLists={[]}
-      />
-    );
+describe('Shopping Lists', () => {
+  it('renders a list of shopping lists', () => {
+    const time = new Date().getTime().toString();
+    const shoppingLists = [
+      {
+        id: 1,
+        name: 'test 1',
+        shoppingItems: [
+          { id: 1, created_at: time, name: 'test item 1' },
+          { id: 2, created_at: time, name: 'test item 2' },
+          { id: 3, created_at: time, name: 'test item 3' },
+        ],
+      },
+    ];
 
-    const input = screen.getByTestId('shopping-list-form-name-test');
-    fireEvent.change(input, { target: { value: 'New Shopping List' } });
+    render(<ShoppingLists shoppingLists={shoppingLists} />);
 
-    const submitButton = screen.getByTestId(
-      'shopping-list-form-submit-button-test'
-    );
-    fireEvent.click(submitButton);
-
-    expect(onCreateShoppingList).toHaveBeenCalledWith({
-      id: null,
-      name: 'New Shopping List',
-      items: [],
-    });
+    const shoppingListsList = screen.getByTestId('shopping-lists');
+    expect(shoppingListsList).toBeInTheDocument();
+    expect(shoppingListsList.children.length).toBe(1);
   });
 });
