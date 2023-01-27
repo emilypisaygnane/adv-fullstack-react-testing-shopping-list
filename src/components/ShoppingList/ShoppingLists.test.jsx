@@ -1,23 +1,17 @@
 import {
   fireEvent,
   render,
-  screen,
 } from '@testing-library/react';
 import ShoppingLists from './ShoppingLists';
 
 describe('ShoppingLists', () => {
   it('renders shopping lists', () => {
     const onCreateShoppingList = jest.fn();
-
-    const defaultShoppingList = {
-      id: null,
-      name: 'shopping list',
-      shoppingItems: [],
-    }; 
-
-    render(<ShoppingLists onCreateShoppingList={onCreateShoppingList}
-      shoppingLists={[]}
-    />
+    const { getByTestId } = render(
+      <ShoppingLists 
+        onCreateShoppingList={onCreateShoppingList}
+        shoppingLists={[]}
+      />
     );
 
     const input = screen.getByTestId('shopping-list-form-name-test');
@@ -28,6 +22,10 @@ describe('ShoppingLists', () => {
     );
     fireEvent.click(submitButton);
 
-    expect(onCreateShoppingList).toHaveBeenCalledWith(defaultShoppingList);
+    expect(onCreateShoppingList).toHaveBeenCalledWith({
+      id: null,
+      name: 'New Shopping List',
+      items: [],
+    });
   });
 });
