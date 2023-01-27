@@ -1,65 +1,41 @@
-import {
-  fireEvent,
-  render,   
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import ShoppingListItem from './ShoppingListItem';
 
-describe('ShoppingListItem', () => {
-  let updateItemMock;
-  let deleteItemMock;
-  let item;
+describe('Shopping List Item', () => {
+  const shoppingItem = {
+    id: 1,
+    item_name: 'test item',
+    quantity: 1,
+  };
 
-  beforeEach(() => {
-    updateItemMock = jest.fn();
-    deleteItemMock = jest.fn();
-    item = {
-      id: '1',
-      item_name: 'Mangoes',
-    };
-  });
-
-  it.skip('renders the item name and quantity', () => {
-    const { getByDisplayValue } = render(
+  it('update button updates shopping item', () => {
+    const onUpdateShoppingItem = jest.fn();
+    render(
       <ShoppingListItem
-        item={item}
-        onUpdateItem={updateItemMock}
-        onDeleteItem={deleteItemMock}
+        shoppingItem={shoppingItem}
+        onUpdateShoppingItem={onUpdateShoppingItem}
       />
     );
-    expect(getByDisplayValue('item.name')).toBeTruthy;
-  });
-  
-  it.skip('calls the updateItemMock when the input field is changed', () => {
-    const { getByDisplayValue } = render(
-      <ShoppingListItem
-        item={item}
-        onUpdateItem={updateItemMock}
-        onDeleteItem={deleteItemMock}
-      />
-    );
-
-    const input = getByDisplayValue(item.name);
-    fireEvent.change(input, { target: { value: 'new item name' } });
-    expect(updateItemMock).toHaveBeenCalledWith(
-      item.id,
-      { 
-        ...item,
-        name: 'new item name',
-      }
+    const updateButton = screen.getByTestId('update-shopping-item-1');
+    fireEvent.click(updateButton);
+    expect(onUpdateShoppingItem).toHaveBeenCalledWith(
+      shoppingItem
     );
   });
 
-  it.skip('calls the deleteItemMock when the delete button is clicked', () => {
-    const { getByText } = render(
+  it('delete button deletes shopping item', () => {
+    const onDeleteShoppingItem = jest.fn();
+    render(
       <ShoppingListItem
-        item={item}
-        onUpdateItem={updateItemMock}
-        onDeleteItem={deleteItemMock}
+        shoppingItem={shoppingItem}
+        onDeleteShoppingItem={onDeleteShoppingItem}
       />
     );
-
-    const deleteButton = getByText('Delete');
+    const deleteButton = screen.getByTestId('delete-shopping-item-1');
     fireEvent.click(deleteButton);
-    expect(deleteItemMock).toHaveBeenCalledWith(item.id);
+    expect(onDeleteShoppingItem).toHaveBeenCalledWith(
+      shoppingItem
+    );
   });
 });

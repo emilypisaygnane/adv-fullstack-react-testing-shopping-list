@@ -1,6 +1,3 @@
-// 'shopping-list-name-test'
-// 'shopping-list--test'
-
 import {
   render,
   screen,

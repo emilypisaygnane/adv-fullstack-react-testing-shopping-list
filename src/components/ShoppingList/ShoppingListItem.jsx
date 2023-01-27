@@ -1,56 +1,25 @@
-import React from 'react';
-
-const ShoppingListItem = ({
-  item,
-  onUpdateItem,
-  onDeleteItem,
-}) => {
-  const [updatedItem, setUpdatedItem] = React.useState({
-    ...item,
-  });
-
-  const handleChange = (e) => {
-    setUpdatedItem({
-      ...updatedItem,
-      [e.target.name]: e.target.value,
-    });
-  };
-
+export default function ShoppingListItem({
+  shoppingItem,
+  onUpdateShoppingItem,
+  onDeleteShoppingItem,
+}) {
   return (
     <div>
-      <form>
-        <input
-          type="text"
-          name="item_name"
-          value={updatedItem.item_name}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="quantity"
-          value={updatedItem.quantity}
-          onChange={handleChange}
-        />
-      </form>
       <span>
-        {item.item_name}: {item.quantity}
+        {shoppingItem.item_name}: {shoppingItem.quantity}
       </span>
       <br />
-      <button
-        data-testid={'update-shopping-item-$item.id}'}
-        onClick={() => onUpdateItem(updatedItem)}
-      >
-        Update
+      <button 
+        data-testid={`update-shopping-item-${shoppingItem.id}`} 
+        onClick={() => onUpdateShoppingItem(shoppingItem)}>
+          update
       </button>
       <br />
-      <button
-        data-testid={`delete-shopping-item-${item.id}`}
-        onClick={() => onDeleteItem(item)}
-      >
-        Delete
+      <button 
+        data-testid={`delete-shopping-item-${shoppingItem.id}`} 
+        onClick={() => onDeleteShoppingItem(shoppingItem)}>
+        delete
       </button>
     </div>
   );
-};
-
-export default ShoppingListItem;
+}
